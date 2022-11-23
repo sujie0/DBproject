@@ -1,4 +1,5 @@
 const updateModel = require('../models/updateModel');
+const checkUserMode = require('../models/checkUserModel');
 const express = require('express');
 const { json } = require('express');
 const CODE = require('../modules/statusCode');
@@ -7,32 +8,48 @@ var url = require('url');
 exports.updateForm=(req, res, next)=>{
     var queryData=url.parse(req.url,true).query;
     var idx=queryData.idx;
-    updateModel.getData(idx, (row)=>{
-        try{
-            if(!row[0])
-                return res.json({ statusCode: CODE.FAIL, msg: "해당 index 게시글이 존재하지 않습니다"});
-            
-            try{
-                updateModel.getComment(idx, (comments)=>{
-                    console.log("update에서 1개 글 조회 결과 확인 : "+JSON.stringify(row));
-                    if(comments[0]){ //댓글이 존재하는 경우 댓글도 get
-                        console.log("update에서 해당 게시글의 댓글 조회 : "+JSON.stringify(comments));
-                    }
-                    return res.json({ statusCode: CODE.SUCCESS, msg: "update 전 글 read success"});
-                });
-            }catch(err){
-                console.log(err);
-                next(err);
-                return res.json({ statusCode: CODE.DB_CONNECTION_ERROR, msg: "DB connection error"});
-            }
-            //console.log("update에서 1개 글 조회 결과 확인 : ",row);
-            //return res.json({ statusCode: CODE.SUCCESS, msg: "update 전 글 read success"});
-        }catch(error){
-            console.log(err);
-            next(err);
-            return res.json({ statusCode: CODE.DB_CONNECTION_ERROR, msg: "DB connection error"});
-        }
-    });
+    var ID = req.session.ID;
+
+    try{
+        checkUserMode.checkUser(idx, (permit)=>{
+            console.log("permit : "+permit[0].ID);
+                if(ID!=permit[0].ID)
+                    return res.json({statusCode : CODE.FAIL, msg : "게시물 작성자만 수정 가능합니다."});
+                else{  
+                    updateModel.getData(idx, (row)=>{
+                        try{
+                            if(!row[0])
+                                return res.json({ statusCode: CODE.FAIL, msg: "해당 index 게시글이 존재하지 않습니다"});
+                            
+                            try{
+                                updateModel.getComment(idx, (comments)=>{
+                                    console.log("update에서 1개 글 조회 결과 확인 : "+JSON.stringify(row));
+                                    if(comments[0]){ //댓글이 존재하는 경우 댓글도 get
+                                        console.log("update에서 해당 게시글의 댓글 조회 : "+JSON.stringify(comments));
+                                    }
+                                    return res.json({ statusCode: CODE.SUCCESS, msg: "update 전 글 read success"});
+                                });
+                            }catch(err){
+                                console.log(err);
+                                next(err);
+                                return res.json({ statusCode: CODE.DB_CONNECTION_ERROR, msg: "DB connection error"});
+                            }
+                            //console.log("update에서 1개 글 조회 결과 확인 : ",row);
+                            //return res.json({ statusCode: CODE.SUCCESS, msg: "update 전 글 read success"});
+                        }catch(error){
+                            console.log(err);
+                            next(err);
+                            return res.json({ statusCode: CODE.DB_CONNECTION_ERROR, msg: "DB connection error"});
+                        }
+                    });
+                }
+        });
+    }catch(err){
+        console.log(err);
+        next(err);
+        return res.json({statusCode : CODE.DB_CONNECTION_ERROR, msg : "DB connection error"});
+    }
+    
 }
 
 

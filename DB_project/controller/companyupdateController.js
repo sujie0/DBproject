@@ -5,6 +5,12 @@ const CODE = require('../modules/statusCode');
 var url = require('url');
 
 exports.updateForm=(req, res, next)=>{
+    var ID = req.session.ID;
+    if(!ID)
+        return res.json({statusCode : CODE.FAIL, msg : "로그인해주세요"});
+    if(ID!="master")
+        return res.json({statusCode : CODE.FAIL, msg : "관리자만 접근 가능합니다."});
+
     var queryData=url.parse(req.url,true).query;
     var Code=queryData.Code;
     updateModel.getData(Code, (row)=>{
@@ -23,6 +29,12 @@ exports.updateForm=(req, res, next)=>{
 
 
 exports.updateData=(req, res, next)=>{
+    var ID = req.session.ID;
+    if(!ID)
+        return res.json({statusCode : CODE.FAIL, msg : "로그인해주세요"});
+    if(ID!="master")
+        return res.json({statusCode : CODE.FAIL, msg : "관리자만 접근 가능합니다."});
+        
     var Code = req.body.Code;
     var Name = req.body.Name;
     var Number = req.body.Number;

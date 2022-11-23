@@ -4,6 +4,11 @@ const { json } = require('express');
 const CODE = require('../modules/statusCode');
 
 exports.getList=(req, res, next)=>{
+    var ID = req.session.ID;
+    if(!ID)
+        return res.json({statusCode : CODE.FAIL, msg : "로그인해주세요"});
+    if(ID!="master")
+        return res.json({statusCode : CODE.FAIL, msg : "관리자만 접근 가능합니다."});
     //if(현재 사용자의 아이디==master) 
     //현재 사용자의 아이디가 관리자의 id인 경우에만 회원 목록 list 접근할  수 있도록 code 추가해야됨
     try{

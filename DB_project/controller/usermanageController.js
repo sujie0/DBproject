@@ -5,6 +5,12 @@ const CODE = require('../modules/statusCode');
 
 module.exports={
     readUser : function(req, res, next){
+        var ID_master = req.session.ID;
+        if(!ID_master)
+            return res.json({statusCode : CODE.FAIL, msg : "로그인해주세요"});
+        if(ID_master!="master")
+            return res.json({statusCode : CODE.FAIL, msg : "관리자만 접근 가능합니다."});
+
         var ID = req.params.ID;
         try{
         usermanageModel.getData(ID, (data)=>{
@@ -21,6 +27,12 @@ module.exports={
     },
 
     deleteUser : function(req, res, next){
+        var ID_master = req.session.ID;
+        if(!ID_master)
+            return res.json({statusCode : CODE.FAIL, msg : "로그인해주세요"});
+        if(ID_master!="master")
+            return res.json({statusCode : CODE.FAIL, msg : "관리자만 접근 가능합니다."});
+
         var ID = req.params.ID;
         try{
             usermanageModel.deleteData(ID, (data)=>{
@@ -37,6 +49,12 @@ module.exports={
     },
 
     postData : function(req, res, next){
+        var ID_master = req.session.ID;
+        if(!ID_master)
+            return res.json({statusCode : CODE.FAIL, msg : "로그인해주세요"});
+        if(ID_master!="master")
+            return res.json({statusCode : CODE.FAIL, msg : "관리자만 접근 가능합니다."});
+            
         var ID = req.params.ID;
         var Grade = req.body.Grade;
         var data = [Grade, ID];

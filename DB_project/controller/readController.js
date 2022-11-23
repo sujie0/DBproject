@@ -83,7 +83,10 @@ module.exports={
 
     postComment : function(req, res, next){
         var board_idx = req.params.board_idx;
-        var ID = req.body.ID; //로그인 구현된 후에 여기 수정 필요
+        var ID = req.session.ID;
+        if(!ID)
+            return res.json({statusCode: CODE.FAIL, msg : "로그인 해주세요"});
+        //var ID = req.body.ID; //로그인 구현된 후에 여기 수정 필요
         var Comment = req.body.Comment;
         var data = [board_idx, ID, Comment, board_idx];
         

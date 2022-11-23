@@ -1,0 +1,7 @@
+/src/backend/node_modules
+
+package-lock.json
+
+package.json
+
+/src/backend/public/images

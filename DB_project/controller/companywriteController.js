@@ -4,6 +4,12 @@ const { json } = require('express');
 const CODE = require('../modules/statusCode');
 
 exports.writeData=(req, res, next)=>{
+    var ID = req.session.ID;
+    if(!ID)
+        return res.json({statusCode : CODE.FAIL, msg : "로그인해주세요"});
+    if(ID!="master")
+        return res.json({statusCode : CODE.FAIL, msg : "관리자만 접근 가능합니다."});
+        
     var Code = req.body.Code;
     var Name = req.body.Name;
     var Number = req.body.Number;
