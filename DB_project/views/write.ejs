@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- 이렇게 하면 주석 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/javascripts/jquery-3.6.1.min.js"></script>
+    <title><%= title %></title>
+  <!--  <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action="/board/write" method="post" enctype="multipart/form-data">
+        <table border="1">
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name="ID" id="ID" required/></td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="Title" id="Title" required/></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="Content" id="Content" cols="30" rows="10" required></textarea></td>
+            </tr>
+            <tr>
+                <td>이미지</td>
+                <td><input type="file" name="Image" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">글쓰기</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function onWriteSubmit(){
+            if($("#ID").val().trim()==""){
+                var message="아이디를 입력해 주세요.";
+                $("#ID").val("");
+                $("#ID").focus();
+                alert(message);
+                return false;
+            }
+            if($("#Title").val().trim()==""){
+                var message="제목을 입력하세요.";
+                $("#Title").val("");
+                $("#Title").focus();
+                alert(message);
+                return false;
+            }
+            if($("#Content").val().trim()==""){
+                var message="본문 내용을 입력해 주세요.";
+                $("#Content").val("");
+                $("#Content").focus();
+                alert(message);
+                return false;
+            }
+        }
+    </script>
+  </body>
+</html>
