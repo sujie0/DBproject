@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/javascripts/jquery-3.6.1.min.js"></script>
+    <title>글 수정</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+    <h1>글 수정</h1>
+    <form action="/board/update" method="post" enctype="multipart/form-data" onsubmit="return onWriteSubmit()">
+        <table border="1">
+            <input type="hidden" name="idx" value="<%=row.idx%>"/>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="Title" id="Title" value="<%=row.글제목%>" required/></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea type="content" name="Content" cols="30" rows="10" required><%=row.글내용%></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">글쓰기</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function onWriteSubmit(){
+            if($("#Title").val().trim()==""){
+                var message="제목을 입력해 주세요.";
+                $("#Title").val("");
+                $("#Title").focus();
+                alert(message);
+                return false;
+            }
+            if($("#Content").val().trim()==""){
+                var message="본문 내용을 입력하세요.";
+                $("#Content").val("");
+                $("#Content").focus();
+                alert(message);
+                return false;
+            }
+        }
+    </script>
+  </body>
+</html>

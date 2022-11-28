@@ -27,15 +27,14 @@ exports.updateForm=(req, res, next)=>{
                                     if(comments[0]){ //댓글이 존재하는 경우 댓글도 get
                                         console.log("update에서 해당 게시글의 댓글 조회 : "+JSON.stringify(comments));
                                     }
-                                    return res.json({ statusCode: CODE.SUCCESS, msg: "update 전 글 read success"});
+                                    res.render('update',{row: row[0]});
+                                    //return res.json({ statusCode: CODE.SUCCESS, msg: "update 전 글 read success"});
                                 });
                             }catch(err){
                                 console.log(err);
                                 next(err);
                                 return res.json({ statusCode: CODE.DB_CONNECTION_ERROR, msg: "DB connection error"});
                             }
-                            //console.log("update에서 1개 글 조회 결과 확인 : ",row);
-                            //return res.json({ statusCode: CODE.SUCCESS, msg: "update 전 글 read success"});
                         }catch(error){
                             console.log(err);
                             next(err);
@@ -54,10 +53,13 @@ exports.updateForm=(req, res, next)=>{
 
 
 exports.updateData=(req, res, next)=>{
+    console.log(JSON.stringify(req.body));
+
     var Title = req.body.Title;
     var Content = req.body.Content;
-    var queryData=url.parse(req.url,true).query;
-    var idx=queryData.idx;
+    //var queryData=url.parse(req.url,true).query;
+    //var idx=queryData.idx;
+    var idx = req.body.idx;
 
     if(!Title)
         console.log("title이 null이다.");
@@ -81,9 +83,8 @@ exports.updateData=(req, res, next)=>{
             if(!result.affectedRows)
                 return res.json({ statusCode: CODE.FAIL, msg: "잘못된 요청으로 변경되지 않았습니다."});
             console.log("result : "+JSON.stringify(result));
-            return res.json({ statusCode: CODE.SUCCESS, msg: "Sucess update data" });
-            //redirect 어디로 할까?
-            //return res.redirect('/board/read/'+idx);
+            //return res.json({ statusCode: CODE.SUCCESS, msg: "Sucess update data" });
+            return res.redirect('/board/read/'+idx);
         });
     }catch(err){
         console.log(err);

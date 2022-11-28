@@ -32,7 +32,7 @@ router.post('/write',upload.single("Image"),writeController.writeData);
 router.get('/read/:idx',readController.readData);
 
 router.get('/update',updateController.updateForm);
-router.post('/update',updateController.updateData);
+router.post('/update',upload.single("Image"), updateController.updateData);
 
 //router.post('/read/:idx',readController.deleteData);
 

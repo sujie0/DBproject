@@ -9,10 +9,11 @@ exports.writeForm=(req,res)=>{
 }
 
 exports.writeData=(req, res, next)=>{
+    //var ID = req.body.ID;
     var ID = req.session.ID;
     if(!ID)
         return res.json({statusCODE : CODE.FAIL, msg : "로그인 해주세요"});
-    //var ID = req.body.ID; //추후에 로그인 된 상태 구현되면 그때 req.body.ID가 아닌 다른 걸로 수정해야됨
+    
     try{
         checkUserMode.checkUser1(ID, (permit)=>{
             if(!permit[0].ID)

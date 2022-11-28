@@ -10,7 +10,7 @@ exports.getList=(req, res, next)=>{
                 return res.json({ statusCode: CODE.FAIL, msg: "No data in DB" });
 
             console.log('data : '+JSON.stringify(data));
-            res.render('list2',{title: "종목토론게시판", data: data}); // -> ejs에서 fornt와 연결하는 방법
+            res.render('list',{title: "종목토론게시판", data: data}); // -> ejs에서 fornt와 연결하는 방법
             //return res.json({ statusCode: CODE.SUCCESS, msg: "getList Success" });
         });
     }catch(err){
