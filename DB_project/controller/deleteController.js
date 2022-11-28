@@ -6,7 +6,9 @@ const CODE = require('../modules/statusCode');
 const url = require('url');
 
 exports.deleteData=(req, res, next)=>{
+       // var idx = req.body.idx;
         //var idx = req.params.idx;
+
         var queryData=url.parse(req.url,true).query;
         var idx=queryData.idx;
 
@@ -26,8 +28,8 @@ exports.deleteData=(req, res, next)=>{
                                         return res.json({ statusCode : CODE.FAIL, msg : "존재하지 않는 게시물입니다."});
                                     console.log("data : "+JSON.stringify(data));
             
-                                    //res.redirect('/board');
-                                    return res.json({ statusCode : CODE.SUCCESS, msg : "Success delete board"});
+                                    res.redirect('/board');
+                                    //return res.json({ statusCode : CODE.SUCCESS, msg : "Success delete board"});
                                 });
                             }catch(err){
                                 console.log(err);

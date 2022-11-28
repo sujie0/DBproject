@@ -102,7 +102,8 @@ module.exports={
                         readModel.postComment(data, (result)=>{
                             
                             console.log("result : "+JSON.stringify(result));
-                            return res.json({ statusCode : CODE.SUCCESS, mesg: "댓글 작성 완료"});
+                            return res.redirect('/board/read/'+board_idx);
+                            //return res.json({ statusCode : CODE.SUCCESS, mesg: "댓글 작성 완료"});
                         });
                     }catch(err){
                         console.log(err);

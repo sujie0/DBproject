@@ -18,7 +18,7 @@
     <form action="/board/update" method="get">
         <table class="table">
             <input type="hidden" name="idx" value="<%=data.idx%>"/>
-            <%indxe=data.idx%>
+            <%index=data.idx%>
             <tr>
                 <td>작성자</td>
                 <td><%=data.닉네임%></td>
@@ -42,7 +42,7 @@
                 </td>
             </tr>
         </table>
-
+        
         <table class="table">
             <%
             for(var i=0; i<comments.length; i++){
@@ -60,10 +60,27 @@
 
         
     </form>
+    <form action="/board/read/<%=index%>" method="post">
+        <table border="1">
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name="ID" id="ID" required/></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><input type="text" name="Comment" id="Comment" required/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">댓글 작성</button>
+                </td>
+            </tr>
+        </table>
+    </form>
     <form action="/board/delete" method="get">
         
         <input type="hidden" name="idx" value="<%=index%>"/>
-        <button type="submit"><%=index%></button> <!--글 삭제 botton-->
+        <button type="submit">글 삭제</button> <!--글 삭제 botton-->
     </form>
   </body>
   </div>
