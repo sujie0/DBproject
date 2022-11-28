@@ -7,6 +7,7 @@ const CODE = require('../modules/statusCode');
 /* 로그인 GET */
 exports.getLogin=(req, res, next)=>{  //로그인 화면
     var session = req.session;
+    res.render('login'); // -> ejs에서 fornt와 연결하는 방법
     /*res.render("user/login", {
         session : session
     });*/
@@ -30,7 +31,8 @@ exports.postLogin=async function(req, res, next){    //이용자 회원가입
             req.session.is_logined = true;
 
             console.log('data : '+JSON.stringify(rows));
-            return res.json({ statusCode: CODE.SUCCESS, body});
+            res.redirect('/board');
+            //return res.json({ statusCode: CODE.SUCCESS, body});
         }else{
             console.log("비밀번호 불일치");
             return res.json({ statusCode: CODE.FAIL, msg: "비밀번호 불일치"})
