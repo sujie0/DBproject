@@ -24,7 +24,7 @@ exports.getComment=(idx, callback)=>{
 
 exports.updateData=(data, callback)=>{
     var sql='UPDATE 종목토론게시판 SET 글제목=?, 글내용=? WHERE idx=?';
-    var sql2='UPDATE 종목토론게시판 SET 글제목=?, 글내용=? 이미지=? WHERE idx=?';
+    var sql2='UPDATE 종목토론게시판 SET 글제목=?, 글내용=?, 이미지=? WHERE idx=?';
     
     if(data.length==3){ //이미지 파일 없는 경우
         connection.query(sql, data, (err, result, filed)=>{
@@ -33,6 +33,8 @@ exports.updateData=(data, callback)=>{
         });
 
     } else if(data.length==4){ //이미지 파일이 있는 경우
+       
+        
         connection.query(sql2, data, (err, result, fileds)=>{
             if(err) throw err;
             callback(result);

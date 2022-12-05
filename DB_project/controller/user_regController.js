@@ -8,6 +8,16 @@ const CODE = require('../modules/statusCode');
     //res.render("user/register");
 }*/
 
+/* 로그인 GET */
+exports.getRegister=(req, res, next)=>{  //로그인 화면
+    
+    res.render('register'); // -> ejs에서 fornt와 연결하는 방법
+    /*res.render("user/login", {
+        session : session
+    });*/
+}
+
+
 exports.registerData=async function(req, res, next){    //이용자 회원가입
     var body = req.body;
 
@@ -24,7 +34,8 @@ exports.registerData=async function(req, res, next){    //이용자 회원가입
     }
     user_regModel.insertData(datas, (rows)=>{
         console.log('data : '+JSON.stringify(rows));
-        return res.json({ statusCode: CODE.SUCCESS, datas});
+        return res.send("<script>alert('회원가입 완료되었습니다!'); window.location.replace('/user/login'); </script>");
+        //return res.json({ statusCode: CODE.SUCCESS, datas});
     });
 
     //salt: 비밀번호를 암호화할 때 추가로 salt를 적용하여 보완성을 더 높여야 암호화가 잘 되었다고 할

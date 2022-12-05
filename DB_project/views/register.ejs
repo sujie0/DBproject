@@ -1,0 +1,38 @@
+<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 이렇게 하면 주석 -->
+
+<!DOCTYPE html>
+<html lang = "en">
+<form action="/user/register" method="POST">
+    <div class="card" style="width: 1000px; margin-left: 100px;">
+      <div class="card-body">
+        <h5 class="card-title">회원가입</h5>
+        <h6 class="card-subtitle mb-2 text-muted">회원가입에 알맞은 정보를 입력 해 주세요</h6>
+    
+        <div class="form-group">
+          <label for="id">닉네임</label>
+          <input type="text" name="닉네임" class="form-control">
+        </div> 
+        <div class="form-group">
+          <label for="id">사용자명</label>
+          <input type="text" name="사용자명" class="form-control">
+        </div> 
+      <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" name="ID" class="form-control">
+        </div> 
+        <div class="form-group">
+          <label for="password">비밀번호</label>
+          <input type="password" name="PW" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="password">이메일</label>
+          <input type="e-mail" name="이메일" class="form-control">
+        </div>
+    
+    
+    <input type="submit" name="submit" value="회원가입" class="form-control mt-5"></div></div></form>
+</html>

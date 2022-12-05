@@ -1,50 +1,43 @@
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
 <!-- 이렇게 하면 주석 -->
+
+<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="/javascripts/jquery-3.6.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
     <title><%= title %></title>
   <!--  <link rel='stylesheet' href='/stylesheets/style.css' /> -->
   </head>
   <body>
+    <div class="container">
     <h1><%= title %></h1>
     <form action="/board/write" method="post" enctype="multipart/form-data">
-        <table border="1">
-            <tr>
-                <td>작성자</td>
-                <td><input type="text" name="ID" id="ID" required/></td>
-            </tr>
-            <tr>
-                <td>제목</td>
-                <td><input type="text" name="Title" id="Title" required/></td>
-            </tr>
-            <tr>
-                <td>내용</td>
-                <td><textarea name="Content" id="Content" cols="30" rows="10" required></textarea></td>
-            </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary pull-right" style="float: right">글쓰기</button>
+            </td>
+        </tr>
+        <a href="/board">리스트로 돌아가기</a>
+        </p>
+        <table class="table">
+        <input type="text" name="Title" class="form-control mt-4 mb-2"
+		placeholder="제목을 입력해주세요." required>
+	
+	    <div class="form-group">
+		    <textarea class="form-control" rows="10" name="Content"
+			    placeholder="내용을 입력해주세요" required
+		    ></textarea>
+	    </div>
             <tr>
                 <td>이미지</td>
                 <td><input type="file" name="Image" /></td>
             </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="submit">글쓰기</button>
-                </td>
-            </tr>
         </table>
-    </form>
     <script>
         function onWriteSubmit(){
-            if($("#ID").val().trim()==""){
-                var message="아이디를 입력해 주세요.";
-                $("#ID").val("");
-                $("#ID").focus();
-                alert(message);
-                return false;
-            }
             if($("#Title").val().trim()==""){
                 var message="제목을 입력하세요.";
                 $("#Title").val("");
@@ -61,5 +54,6 @@
             }
         }
     </script>
+    </div>
   </body>
 </html>

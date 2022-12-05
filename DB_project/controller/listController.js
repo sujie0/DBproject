@@ -4,6 +4,7 @@ const { json } = require('express');
 const CODE = require('../modules/statusCode');
 
 exports.getList=(req, res, next)=>{
+    
     try{
         listModel.getList((data)=>{
             if(!data[0])

@@ -6,7 +6,7 @@ const dbconfig   = require('../config/database.js');
 const connection = mysql.createConnection(dbconfig);
 
 module.exports={getList(callback){
-    connection.query('SELECT idx, 종목코드, 기업이름, 상장주식수 FROM 기업정보;', (err, row, fileds)=>{
+    connection.query('SELECT * FROM 기업정보;', (err, row, fileds)=>{
         if(err) throw err;
         callback(row);
     });

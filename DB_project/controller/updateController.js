@@ -14,7 +14,8 @@ exports.updateForm=(req, res, next)=>{
         checkUserMode.checkUser(idx, (permit)=>{
             console.log("permit : "+permit[0].ID);
                 if(ID!=permit[0].ID)
-                    return res.json({statusCode : CODE.FAIL, msg : "게시물 작성자만 수정 가능합니다."});
+                return res.send("<script>alert('게시물 작성자만 수정 가능합니다.'); window.location.replace('/board'); </script>");
+                    //return res.json({statusCode : CODE.FAIL, msg : "게시물 작성자만 수정 가능합니다."});
                 else{  
                     updateModel.getData(idx, (row)=>{
                         try{

@@ -5,6 +5,11 @@ const { json } = require('express');
 const CODE = require('../modules/statusCode');
 
 exports.writeForm=(req,res)=>{
+    var ID = req.session.ID;
+    if(!ID)
+    {
+        return res.send("<script>alert('로그인이 필요한 서비스입니다.'); window.location.replace('/user/login'); </script>");
+    }
     res.render('write',{title: "게시판 글 쓰기"});
 }
 
@@ -12,12 +17,20 @@ exports.writeData=(req, res, next)=>{
     //var ID = req.body.ID;
     var ID = req.session.ID;
     if(!ID)
-        return res.json({statusCODE : CODE.FAIL, msg : "로그인 해주세요"});
+    {
+        res.write("<script>alert('success')</script>");
+        res.write("<script>window.location=\"/user/login\"</script>");
+        //return res.json({statusCODE : CODE.FAIL, msg : "로그인 해주세요"});
+    }
     
     try{
         checkUserMode.checkUser1(ID, (permit)=>{
             if(!permit[0].ID)
-                return res.json({statusCODE : CODE.FAIL, msg : "로그인 해주세요"});
+            {
+                res.write("<script>alert('success')</script>");
+                res.write("<script>window.location=\"/user/login\"</script>");
+                //return res.json({statusCODE : CODE.FAIL, msg : "로그인 해주세요"});
+            }
             else{
                 var Title = req.body.Title;
                 var Content = req.body.Content;

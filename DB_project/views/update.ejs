@@ -1,31 +1,36 @@
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-
+<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="/javascripts/jquery-3.6.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
     <title>글 수정</title>
     <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
   </head>
   <body>
+    <div class="container">
     <h1>글 수정</h1>
     <form action="/board/update" method="post" enctype="multipart/form-data" onsubmit="return onWriteSubmit()">
-        <table border="1">
+        <tr>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary pull-right" style="float: right">글쓰기</button>
+            </td>
+        </tr>
+        <a href="/board">리스트로 돌아가기</a>
+        </p>
+        <table class="table">
             <input type="hidden" name="idx" value="<%=row.idx%>"/>
-            <tr>
-                <td>제목</td>
-                <td><input type="text" name="Title" id="Title" value="<%=row.글제목%>" required/></td>
-            </tr>
-            <tr>
-                <td>내용</td>
-                <td><textarea type="content" name="Content" cols="30" rows="10" required><%=row.글내용%></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="submit">글쓰기</button>
-                </td>
-            </tr>
+            <input type="text" name="Title" class="form-control mt-4 mb-2" value="<%=row.글제목%>" required>
+        
+	    <div class="form-group">
+		    <textarea class="form-control" rows="10" name="Content" required><%=row.글내용%></textarea>
+	    </div>
+        <tr>
+            <td>이미지</td>
+            <td><input type="file" name="Image" /></td>
+        </tr>
+            
         </table>
     </form>
     <script>
@@ -46,5 +51,6 @@
             }
         }
     </script>
+    </div>
   </body>
 </html>
