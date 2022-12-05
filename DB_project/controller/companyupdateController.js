@@ -18,7 +18,8 @@ exports.updateForm=(req, res, next)=>{
             if(!row[0])
                 return res.json({ statusCode : CODE.FAIL, msg: "해당 회사가 존재하지 않습니다."});
             console.log("update에서 1개 글 조회 결과 확인 : ",row);
-            return res.json({ statusCode: CODE.SUCCESS, msg: "Success"});
+            res.render('companyUpdate',{row: row[0]});
+            //return res.json({ statusCode: CODE.SUCCESS, msg: "Success"});
         }catch(error){
             console.log(err);
             next(err);
@@ -35,11 +36,12 @@ exports.updateData=(req, res, next)=>{
     if(ID!="master")
         return res.json({statusCode : CODE.FAIL, msg : "관리자만 접근 가능합니다."});
         
-    var Code = req.body.Code;
+    var Code = req.body.Code[0];
     var Name = req.body.Name;
     var Number = req.body.Number;
     var Info = req.body.Info;
     var data=[Code, Name, Number, Info, Code];
+    console.log("result : "+JSON.stringify(data));
     
     for(var i=0;i<data.length;i++){
         if(!data[i])
@@ -51,9 +53,8 @@ exports.updateData=(req, res, next)=>{
             if(!result.affectedRows)
                 return res.json({ statusCode: CODE.FAIL, msg: "잘못된 요청으로 변경되지 않았습니다."});
             //console.log("result : "+JSON.stringify(result));
-            return res.json({ statusCode: CODE.SUCCESS, msg: "Sucess update data" });
-            //redirect 어디로 할까?
-            //return res.redirect('/company');
+            //return res.json({ statusCode: CODE.SUCCESS, msg: "Sucess update data" });
+            return res.send("<script>alert('수정 완료되었습니다.'); window.location.replace('/company'); </script>");
         });
     }catch(err){
         console.log(err);

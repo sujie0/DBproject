@@ -1,0 +1,36 @@
+<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 이렇게 하면 주석 -->
+
+<!DOCTYPE html>
+<html lang = "en">
+<div class="card" style="width: 1000px; margin-left: 400px;">
+    <div class="card-body">
+    <h5 class="card-title">주식회사 정보</h5>
+    <h6 class="card-subtitle mb-2 text-muted">주식회사의 세부정보를 표시합니다</h6>
+
+    <% if(session=='master') { %>
+        <div class="container">
+    <p>
+        <button type="button" class="btn btn-primary pull-right" onclick="location.href='/company/update?Code=<%=rows.종목코드%>'">수정</button>
+    </p>
+    </div>  
+    <% } %>
+
+	<div>
+		<dl>
+			<dt>종목코드</dt>
+			<dd style="margin-left: 10px;"><%=rows.종목코드%></dd>
+			<dt>기업이름</dt>
+			<dd style="margin-left: 10px;"><%=rows.기업이름%></dd>
+			<dt>상장주식수</dt>
+			<dd style="margin-left: 10px;"><%=rows.상장주식수%></dd>
+            <dt>기업개요</dt>
+			<dd style="margin-left: 10px;"><%=rows.기업개요%></dd>
+		</dl>
+	</div>
+	</div>
+</div>
+</html>

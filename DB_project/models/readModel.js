@@ -14,7 +14,7 @@ exports.getData=(idx, callback)=>{
 }
 
 exports.getComment=(idx, callback)=>{
-    var sql = 'SELECT idx, ID, 댓글 FROM 종목토론게시판_댓글 WHERE 게시판idx=?';
+    var sql = 'SELECT idx, 닉네임, 댓글 FROM 종목토론게시판_댓글 NATURAL JOIN 사용자 WHERE 게시판idx=? ORDER BY idx';
     connection.query(sql, idx, (err, comments, fileds)=>{
         if(err) throw err;
         callback(comments);

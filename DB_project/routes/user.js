@@ -10,6 +10,7 @@ var user_buyController = require('../controller/user_buyController');         //
 var user_sellController = require('../controller/user_sellController');       //이용자 주식매도
 
 //router.get('/register', user_regController.getData);      //회원가입 화면
+router.get('/register',user_regController.getRegister);
 router.post('/register', user_regController.registerData);                 
 
 router.get('/login', user_logController.getLogin);          //로그인 화면

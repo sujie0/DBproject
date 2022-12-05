@@ -1,0 +1,69 @@
+<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>주식회사 정보 수정</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+    <div class="container">
+    <h1>주식회사 정보 수정</h1>
+    <form action="/company/update" method="post" onsubmit="return onWriteSubmit()">
+        <tr>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary pull-right" style="float: right">수정</button>
+            </td>
+        </tr>
+        <a href="/company">주식회사 목록으로 돌아가기</a>
+        </p>
+        <table class="table">
+            <input type="hidden" name="Code" value="<%=row.Code%>"/>
+            <input type="number" name="Code" class="form-control mt-4 mb-2" value="<%=row.종목코드%>" required>
+            <input type="text" name="Name" class="form-control mt-4 mb-2" value="<%=row.기업이름%>" required>
+            <input type="number" name="Number" class="form-control mt-4 mb-2" value="<%=row.상장주식수%>" required>
+            
+	    <div class="form-group">
+		    <textarea class="form-control" rows="10" name="Info" required><%=row.기업개요%></textarea>
+	    </div>
+    
+            
+        </table>
+    </form>
+    <script>
+        function onWriteSubmit(){
+            if($("#Code").val().trim()==""){
+                var message="종목 코드를 입력해 주세요.";
+                $("#Code").val("");
+                $("#Code").focus();
+                alert(message);
+                return false;
+            }
+            if($("#Name").val().trim()==""){
+                var message="기업 이름을 입력하세요.";
+                $("#Name").val("");
+                $("#Name").focus();
+                alert(message);
+                return false;
+            }
+            if($("#Number").val().trim()==""){
+                var message="상장 주식수를 입력해 주세요.";
+                $("#Number").val("");
+                $("#Number").focus();
+                alert(message);
+                return false;
+            }
+            if($("#Info").val().trim()==""){
+                var message="기업 개요를 입력하세요.";
+                $("#Info").val("");
+                $("#Info").focus();
+                alert(message);
+                return false;
+            }
+        }
+    </script>
+    </div>
+  </body>
+</html>

@@ -17,9 +17,11 @@ exports.deleteData=(req, res, next)=>{
         try{
             checkUserMode.checkUser(idx, (permit)=>{
                 console.log("permit : "+permit[0].ID);
-                if(ID!=permit[0].ID)
-                    return res.json({statusCode : CODE.FAIL, msg : "게시물 작성자만 삭제 가능합니다."});
-                else{
+                if(ID=='master') {}
+                else if(ID!=permit[0].ID)
+                    return res.send("<script>alert('게시물 작성자만 삭제 가능합니다.'); window.location.replace('/board'); </script>");
+                    //return res.json({statusCode : CODE.FAIL, msg : "게시물 작성자만 삭제 가능합니다."});
+               
                     try{
                         deleteModel.deleteComment(idx, (result)=>{
                             try{
@@ -42,7 +44,7 @@ exports.deleteData=(req, res, next)=>{
                         next(err);
                         return res.json({ statusCode : CODE.DB_CONNECTION_ERROR, mesg: "DB connection error"});
                     }
-                }
+                
             });
         }catch(err){
             console.log(err);

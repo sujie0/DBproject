@@ -1,87 +1,116 @@
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
+<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
 <!DOCTYPE html>
 <html lang = "en">
     <head>
-        <script src="/javascripts/jquery-3.6.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <title><%= title %></title>
-    <!--    <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+        
     </head>    
 
-    <div class="container">
-        <h2>게시판 세부 내용</h2>
-        <p>게시판 작성 글 세부 내용 출력~~!!</p>
+    <style>
+
         
-         
+        .space {
+  width: 4px;
+  height: auto;
+  display: inline-block;
+}
+        
+        
+        
+        </style>
+      
+    <div class="container">
+        <p>
+        <h2>종목토론게시판</h2>
+        <button type="button" class="btn btn-primary pull-right" style="float: right" onclick="location.href='/board/delete?idx=<%=data.idx%>'">글삭제</button>
+        <button type="button" class="btn btn-primary pull-right" style="float: right" onclick="location.href='/board/update?idx=<%=data.idx%>'">글수정</button>
+        
+        <a href="/board">리스트로 돌아가기</a>
+        </p>
+        <hr style="border : solid 1px;">
+        
+        
   <body>
     <%var index%>
     <form action="/board/update" method="get">
         <table class="table">
             <input type="hidden" name="idx" value="<%=data.idx%>"/>
             <%index=data.idx%>
-            <tr>
-                <td>작성자</td>
-                <td><%=data.닉네임%></td>
-            </tr>
-            <tr>
-                <td>제목</td>
-                <td><%=data.글제목%></td>
-            </tr>
-            <tr>
-                <td>내용</td>
-                <td><%=data.글내용%></td>
-            </tr>
-            <tr>
-                <td>이미지</td>
-                <td><img src="<%=data.이미지%>" alt="이미지" width="300" /></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="submit">글 수정</button>
-                    <a href="/board">리스트로 돌아가기</a>
-                </td>
-            </tr>
+
+            <p><h3><%=data.글제목%></h3><%=data.닉네임%></p>
+            <hr>
+<!--
+            <p>
+                <button type="button" class="btn btn-primary pull-right" onclick="location.href='/board/update?idx=<%=data.idx%>'">글수정</button>
+                <a href="/board">리스트로 돌아가기</a>
+            </p>
+-->            
+
+            <p><%=data.글내용%></p>
+            
+            <% if(data.이미지) { %> <img src="<%=data.이미지%>" alt="이미지" width="300" /> <% } %>
+            
+       
         </table>
+        <hr style="border : solid 1px;">
         
-        <table class="table">
-            <%
+    
+</form>
+
+<!--  댓글  -->
+<form action="/board/read/<%=index%>" method="post">
+    <div class="container">
+        <label for="Comment">댓글</label>
+        <form name="commentInsertForm">
+            <div class="input-group">
+               
+               <input type="text" class="form-control" id="Comment" name="Comment" placeholder="댓글을 입력하세요.">
+               <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary pull-right" style="float: right">등록</button>
+               </span>
+              </div>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="commentList"></div>
+    </div>
+    <br>
+        <p>
+<%
             for(var i=0; i<comments.length; i++){
                 var oneItem=comments[i];
 %>
+
                 <tr>
-                    <td><%=oneItem.idx%></td>
-                    <td><%=oneItem.ID%></td>
-                    <td><%=oneItem.댓글%></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td><%=oneItem.닉네임%></td>
+                    <pre><td>&nbsp;&nbsp;&nbsp;&nbsp;<%=oneItem.댓글%></td></pre>
+                    <hr>
                 </tr>
 <%
             }
 %>
-        </table>
+        </p>
 
         
     </form>
-    <form action="/board/read/<%=index%>" method="post">
-        <table border="1">
+    <!--<form action="/board/read/<%=index%>" method="post">
+        <table class="table">
             <tr>
-                <td>작성자</td>
-                <td><input type="text" name="ID" id="ID" required/></td>
-            </tr>
-            <tr>
-                <td>내용</td>
+                <td>댓글</td>
                 <td><input type="text" name="Comment" id="Comment" required/></td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <button type="submit">댓글 작성</button>
+                <td colspan="1">
+                    <button type="submit">등록</button>
                 </td>
             </tr>
         </table>
-    </form>
-    <form action="/board/delete" method="get">
-        
-        <input type="hidden" name="idx" value="<%=index%>"/>
-        <button type="submit">글 삭제</button> <!--글 삭제 botton-->
-    </form>
+    </form>-->
+    
   </body>
   </div>
 </html>

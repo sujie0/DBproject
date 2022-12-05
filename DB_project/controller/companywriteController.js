@@ -3,6 +3,16 @@ const express = require('express');
 const { json } = require('express');
 const CODE = require('../modules/statusCode');
 
+exports.writeForm=(req,res)=>{
+    var ID = req.session.ID;
+    if(ID!="master")
+    {
+        return res.send("<script>alert('관리자만 접근 가능합니다.'); window.location.replace('/user/login'); </script>");
+    }
+    res.render('companyWrite',{title: "주식회사 등록"});
+}
+
+
 exports.writeData=(req, res, next)=>{
     var ID = req.session.ID;
     if(!ID)
@@ -30,9 +40,8 @@ exports.writeData=(req, res, next)=>{
                 try{
                     writeModel.insertData(data,()=>{
                         console.log("data : "+JSON.stringify(data));
-                        return res.json({ statusCode: CODE.SUCCESS, msg: "Sucess insert data" });
-                        //redirect 어디로 할까?
-                        //return res.redirect('/company');
+                        //return res.json({ statusCode: CODE.SUCCESS, msg: "Sucess insert data" });
+                        return res.send("<script>alert('회사 등록이 완료되었습니다.'); window.location.replace('/company'); </script>");
                     });
                 }catch(err){
                     console.log(err);
