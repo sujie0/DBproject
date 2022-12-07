@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang = "en">
-<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
+	<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+	<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+	<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
 
 <form action="/user/login" method="POST">
-	<div class="card" style="width: 1000px; margin-left: 400px;">
+	<div class="card" style="width: 1000px; margin-left: 200px;">
 	  <div class="card-body">
 		<h5 class="card-title">로그인</h5>
 		<h6 class="card-subtitle mb-2 text-muted">아이디 비밀번호를 입력해 주세요</h6>

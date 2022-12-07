@@ -8,7 +8,8 @@ exports.getList=(req, res, next)=>{    //주식회사 정보 목록 조회
     try{
         com_listModel.getList((rows)=>{
             if(!rows[0])
-                return res.json({ statusCode: CODE.FAIL, msg: "No data in DB" });
+            history.go(-1);
+                //return res.json({ statusCode: CODE.FAIL, msg: "No data in DB" });
 
             //console.log('data : '+JSON.stringify(rows));
             res.render('company',{rows: rows, session : ID}); // -> ejs에서 fornt와 연결하는 방법
@@ -17,6 +18,7 @@ exports.getList=(req, res, next)=>{    //주식회사 정보 목록 조회
     }catch(err){
         console.log(err);
         next(err);
-        return res.json({ statusCode: CODE.DB_CONNECTION_ERROR, msg: "DB connection error"});
+        return res.send("<script>alert('DB 연결 오류'); history.go(-1); </script>");
+        //return res.json({ statusCode: CODE.DB_CONNECTION_ERROR, msg: "DB connection error"});
     }
 }

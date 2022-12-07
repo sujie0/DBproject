@@ -9,7 +9,7 @@ exports.writeForm=(req,res)=>{
     {
         return res.send("<script>alert('관리자만 접근 가능합니다.'); window.location.replace('/user/login'); </script>");
     }
-    res.render('companyWrite',{title: "주식회사 등록"});
+    res.render('companyWrite',{title: "주식회사 등록", session : ID});
 }
 
 
@@ -50,13 +50,11 @@ exports.writeData=(req, res, next)=>{
                 }
             }
             else
-                return res.json({ statusCode: CODE.FAIL, msg: "해당 회사가 이미 존재합니다."});
+                return res.send("<script>alert('해당 회사가 이미 존재합니다.'); history.go(-1); </script>");
         });
     }catch(err){
         console.log(err);
         next(err);
         return res.json({ statusCode: CODE.DB_CONNECTION_ERROR, msg: "DB connection error"});
     }
-
-    
 }

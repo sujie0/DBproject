@@ -10,8 +10,8 @@ const CODE = require('../modules/statusCode');
 
 /* 로그인 GET */
 exports.getRegister=(req, res, next)=>{  //로그인 화면
-    
-    res.render('register'); // -> ejs에서 fornt와 연결하는 방법
+    var ID = req.session.ID;
+    res.render('register', {session : ID}); // -> ejs에서 fornt와 연결하는 방법
     /*res.render("user/login", {
         session : session
     });*/

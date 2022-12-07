@@ -10,7 +10,7 @@ exports.writeForm=(req,res)=>{
     {
         return res.send("<script>alert('로그인이 필요한 서비스입니다.'); window.location.replace('/user/login'); </script>");
     }
-    res.render('write',{title: "게시판 글 쓰기"});
+    res.render('write',{title: "게시판 글 쓰기", session : ID});
 }
 
 exports.writeData=(req, res, next)=>{

@@ -1,10 +1,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <!-- 이렇게 하면 주석 -->
-
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
 <!DOCTYPE html>
 <html lang = "en">
-
+<div class="container">
 <h3>보유주식</h3>
 <table class="table table-dark companytable" style=" margin-top: 50px;">
   <thead>
@@ -19,18 +21,25 @@
     </tr>
   </thead>
   <tbody>
-	{% for user in ownstocks<!--플라스크에서 쓰이던 for문 법--> %}
-	    <tr>
-		    <td><a>{{ 보유주식['종목코드'] }}</a></td>
-		    <td><a>{{ 보유주식['매수주식수'] }}</a></td>
-		    <td><a>{{ 보유주식['매수가'] }}</a></td>
-		    <td><a>{{ 보유주식['매수일'] }}</a></td>
-		    <td><a>{{ 보유주식['매도주식수'] }}</a></td>
-		    <td><a>{{ 보유주식['매도가'] }}</a></td>
-		    <td><a>{{ 보유주식['매도일'] }}</a></td>
-		    <td>{{ 관심종목['상장주식수'] }}</td>
-	    </tr>
-	{% endfor %}
+
+<%
+    for(var i=0; i<rows.length; i++){
+        var oneItem=rows[i];
+%>
+        <tr>
+          <td><a><%=oneItem.종목코드%></a></td>
+			    <td><a><%=oneItem.매수주식수%></a></td>
+			    <td><a><%=oneItem.매수가%></a></td>
+			    <td><a><%=oneItem.매수일%></a></td>
+			    <td><a><%=oneItem.매도주식수%></a></td>
+			    <td><a><%=oneItem.매도가%></a></td>
+			    <td><a><%=oneItem.매도일%></a></td>
+			  
+        </tr>
+<%
+    }
+%>
   </tbody>
 </table>
+</div>
 </html>
