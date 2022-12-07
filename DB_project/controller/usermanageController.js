@@ -21,7 +21,7 @@ module.exports={
 
             try{
                 usermanageModel.getContent(ID, (Content)=>{
-                    res.render('userRead',{data: data[0], Content : Content});
+                    res.render('userRead',{data: data[0], Content : Content, session : ID_master});
                 });
             }catch(err){
                 console.log(err);
@@ -78,7 +78,7 @@ module.exports={
         try{
             usermanageModel.postData(data, (row)=>{
                 if(!row.affectedRows)
-                    return res.json({ statusCode : CODE.FAIL, msg : "존재하지 않는 회원입니다."});
+                    return res.send("<script>alert('존재하지 않는 회원입니다.'); window.location.replace('/manager/userlist'); </script>");
                 console.log("row : "+JSON.stringify(row));
                 return res.send("<script>alert('변경되었습니다.'); window.location.replace('/manager/userlist'); </script>");
                 //return res.json({ statusCode : CODE.SUCCESS, msg : "회원 등급 조정 성공"});

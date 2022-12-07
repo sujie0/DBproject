@@ -1,4 +1,6 @@
-<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
 <!DOCTYPE html>
 <html>
   <head>

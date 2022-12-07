@@ -1,4 +1,6 @@
-<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -19,7 +21,7 @@
               <th>이메일</th>
               <th>회원등급</th>
               <th>등급수정</th>
-              <th>세부정보</th>
+             <!--<th>세부정보</th>--> 
               <th>회원삭제</th>
             </tr>
           </thead>
@@ -47,7 +49,7 @@
                         </form>   
                     
                    
-                    <td><button type="button" class="btn btn-primary pull-right"  onclick="location.href='/manager/read/<%=oneItem.ID%>'">조회</button></td>
+                    <!--<td><button type="button" class="btn btn-primary pull-right"  onclick="location.href='/manager/read/<%=oneItem.ID%>'">조회</button></td>-->
                     <td><button type="button" class="btn btn-primary pull-right"  onclick="location.href='/manager/delete?ID=<%=oneItem.ID%>'">삭제</button></td>
                 </tr>
 <%

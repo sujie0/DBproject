@@ -18,7 +18,7 @@ exports.updateForm=(req, res, next)=>{
             if(!row[0])
                 return res.json({ statusCode : CODE.FAIL, msg: "해당 회사가 존재하지 않습니다."});
             console.log("update에서 1개 글 조회 결과 확인 : ",row);
-            res.render('companyUpdate',{row: row[0]});
+            res.render('companyUpdate',{row: row[0], session : ID});
             //return res.json({ statusCode: CODE.SUCCESS, msg: "Success"});
         }catch(error){
             console.log(err);
@@ -45,13 +45,13 @@ exports.updateData=(req, res, next)=>{
     
     for(var i=0;i<data.length;i++){
         if(!data[i])
-            return res.json({ statusCode: CODE.FAIL, msg: "모든 내용을 입력해주세요" });
+            return res.send("<script>alert('모든 내용을 입력해주세요'); history.go(-1); </script>");
     }
 
     try{
         updateModel.Update(data,(result)=>{
             if(!result.affectedRows)
-                return res.json({ statusCode: CODE.FAIL, msg: "잘못된 요청으로 변경되지 않았습니다."});
+                return res.send("<script>alert('잘못된 요청으로 변경되지 않았습니다.'); history.go(-1); </script>");
             //console.log("result : "+JSON.stringify(result));
             //return res.json({ statusCode: CODE.SUCCESS, msg: "Sucess update data" });
             return res.send("<script>alert('수정 완료되었습니다.'); window.location.replace('/company'); </script>");

@@ -20,7 +20,7 @@ exports.updateForm=(req, res, next)=>{
                     updateModel.getData(idx, (row)=>{
                         try{
                             if(!row[0])
-                                return res.json({ statusCode: CODE.FAIL, msg: "해당 index 게시글이 존재하지 않습니다"});
+                                return res.send("<script>alert('해당 게시글이 존재하지 않습니다.'); history.go(-1); </script>");
                             
                             try{
                                 updateModel.getComment(idx, (comments)=>{
@@ -28,7 +28,7 @@ exports.updateForm=(req, res, next)=>{
                                     if(comments[0]){ //댓글이 존재하는 경우 댓글도 get
                                         console.log("update에서 해당 게시글의 댓글 조회 : "+JSON.stringify(comments));
                                     }
-                                    res.render('update',{row: row[0]});
+                                    res.render('update',{row: row[0], session : ID});
                                     //return res.json({ statusCode: CODE.SUCCESS, msg: "update 전 글 read success"});
                                 });
                             }catch(err){

@@ -1,42 +1,120 @@
-<%- include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs') %>
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <!-- 이렇게 하면 주석 -->
-
+<link rel="stylesheet" href="../css/style.default.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="C:\Users\goodluck\Downloads\Backend-develop\Backend-develop\DB_project\example1\css\mycss.css">
+  <style>
+    div{
+      float: left;
+    }
+  </style>
 <!DOCTYPE html>
 <html lang = "en">
+<body style="background-color: aliceblue;">
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-100" src="C:\Users\goodluck\Desktop\db\img\임시로고.png" alt="First slide">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="C:\Users\goodluck\Desktop\db\img\광운대.jpg" alt="Second slide">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="C:\Users\goodluck\Desktop\db\img\광운대2.jpg" alt="Third slide">
+  <div class="card" style="width: 500px; margin-left: 100px; margin-top: 70px;box-shadow: 10px 10px;">
+    <div class="card-body">
+      <h5 class="card-title">top 종목 <a href="/stock/top">+</a></h5>
+      <div>
+        <table class="table table-striped companytable" style=" margin-top: 50px;">
+          <thead>
+            <tr>
+              <!--<th scope="col">id</th>-->
+              <th scope="col">종목코드</th>
+              <th scope="col">거래량</th>
+              <th scope="col">상승률</th>
+              <th scope="col">하락률</th>
+            </tr>
+          </thead>
+          <tbody><!--top종목 -->
+          <% for(var i=0; i<6; i++){
+                var oneItem=rows[i]; 
+            %>
+              <tr>
+                <!--<th><a href="/company/read?idx={idx}"><%=oneItem.idx%></a></th>-->
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.거래량%></a></td>
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.상승률%></a></td>
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.하락률%></a></td>
+              </tr>
+          <% } %>
+          </tbody>
+        </table>
       </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
   </div>
 
-  <div class="slogan">
-      <h3 class="slogan">Quv Investing Service</h3>
-      <p class="slogan">큐브투자는 최고의 결과로 보답합니다.</p>
   </div>
+    <div class="card" style="width: 500px; margin-left: 70px; margin-top: 70px; box-shadow: 10px 10px; ">
+      <div class="card-body">
+      <h5 class="card-title">게시글 <a href="/board">+</a></h5>
+    </div>
+    <div>
+        <table class="table table-striped companytable" style=" margin-top: 50px;">
+          <thead>
+            <tr>
+              <!--<th scope="col">id</th>-->
+              <th scope="col">idx</th>
+              <th scope="col">글제목</th>
+              <th scope="col">닉네임</th>
+            </tr>
+          </thead>
+          <tbody><!--top종목 -->
+          <% for(var i=0;  i<6; i++){
+                var oneItem=rows[i]; 
+            %>
+              <tr>
+                <!--<th><a href="/company/read?idx={idx}"><%=oneItem.idx%></a></th>-->
+                <td><a><%=oneItem.idx%></a></td>
+                <td><a href="/board/read?idx=<%=oneItem.idx%>"><%=oneItem.글제목%></a></td>
+                <td><a><%=oneItem.닉네임%></a></td>
+              </tr>
+          <% } %>
+          </tbody>
+        </table>
+      </div>
+  </div>
+
+  <div class="card" style="width: 500px; margin-left: 70px; margin-top: 70px; box-shadow: 10px 10px; ">
+      <div class="card-body">
+      <h5 class="card-title">주식회사 <a href="/company">+</a></h5>
+    </div>
+     <div>
+        <table class="table table-striped companytable" style=" margin-top: 50px;">
+          <thead>
+            <tr>
+              <!--<th scope="col">id</th>-->
+              <th scope="col">idx</th>
+              <th scope="col">종목코드</th>
+              <th scope="col">기업이름</th>
+              <th scope="col">상장주식수</th>
+            </tr>
+          </thead>
+          <tbody><!--top종목 -->
+          <% for(var i=0;  i<6; i++){
+                var oneItem=rows[i]; 
+            %>
+              <tr>
+                <!--<th><a href="/company/read?idx={idx}"><%=oneItem.idx%></a></th>-->
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.idx%></a></td>
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.기업이름%></a></td>
+                <td><a><%=oneItem.상장주식수%></a></td>
+              </tr>
+          <% } %>
+          </tbody>
+        </table>
+      </div>
+  </div>
+
+  </body>
 
   </html>

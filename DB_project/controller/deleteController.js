@@ -19,7 +19,7 @@ exports.deleteData=(req, res, next)=>{
                 console.log("permit : "+permit[0].ID);
                 if(ID=='master') {}
                 else if(ID!=permit[0].ID)
-                    return res.send("<script>alert('게시물 작성자만 삭제 가능합니다.'); window.location.replace('/board'); </script>");
+                    return res.send("<script>alert('게시물 작성자만 삭제 가능합니다.'); history.go(-1); </script>");
                     //return res.json({statusCode : CODE.FAIL, msg : "게시물 작성자만 삭제 가능합니다."});
                
                     try{

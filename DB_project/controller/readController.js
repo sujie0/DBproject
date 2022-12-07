@@ -6,11 +6,12 @@ const url = require('url');
 
 module.exports={
     readData : function(req, res, next){
+        var session = req.session.ID;
         var idx = req.params.idx;
         try{
         readModel.getData(idx, (data)=>{
             if(!data[0])
-                return res.json({ statusCode: CODE.FAIL, msg: "존재하지 않는 게시물입니다." });
+                return res.send("<script>alert('게시물이 존재하지 않습니다.'); history.go(-1); </script>");
 
             try{ //댓글 read
                 readModel.getComment(idx, (comments)=>{
@@ -20,7 +21,7 @@ module.exports={
                         console.log("read에서 해당 게시글의 댓글 조회 : "+JSON.stringify(comments));
                     }
 
-                    res.render('read',{title: "게시판", data: data[0], comments: comments});
+                    res.render('read',{title: "게시판", data: data[0], comments: comments, session : session});
                 });
             }catch(err){
                 console.log(err);
@@ -48,7 +49,7 @@ module.exports={
                 try{
                     readModel.deleteData(idx, (data)=>{
                         if(!data.affectedRows)
-                            return res.json({ statusCode : CODE.FAIL, msg : "존재하지 않는 게시물입니다."});
+                            return res.send("<script>alert('존재하지 않는 게시물입니다.'); history.go(-1); </script>");
                         console.log("data : "+JSON.stringify(data));
 
                         res.redirect('/board');
@@ -113,7 +114,7 @@ module.exports={
                     }
                 }
                 else
-                    return res.json({ statusCode : CODE.FAIL, mesg: "해당 게시물이 존재하지 않습니다."});
+                    return res.send("<script>alert('해당 게시물이 존재하지 않습니다.'); history.go(-1); </script>");
             });
         }catch(err){
             console.log(err);
