@@ -17,7 +17,7 @@ exports.getList=(req, res, next)=>{
             if(!data[0])
                 return res.send("<script>alert('사용자가 존재하지 않습니다.'); window.location.replace('/board') </script>");
 
-            console.log('data : '+JSON.stringify(data));
+            //console.log('data : '+JSON.stringify(data));
             res.render('userList',{title: "이용자 목록", data: data, session : ID}); // -> ejs에서 fornt와 연결하는 방법
             //return res.json({ statusCode: CODE.SUCCESS, msg: "getList Success" });
         });

@@ -1,19 +1,19 @@
-const listModel = require('../models/listModel');
-const express = require('express');
+var stock_readModel = require('../models/stock_readModel');
+var express = require('express');
 const { json } = require('express');
 const CODE = require('../modules/statusCode');
 
-exports.getList=(req, res, next)=>{
+exports.readData=(req, res, next)=>{    //종목시세 세부정보 조회
+    var code = req.params.code;
     var session = req.session.ID;
     var no_data=0;
-
     try{
-        listModel.getList((data)=>{
+        stock_readModel.getData(code, (data)=>{
             if(!data[0])
                 no_data=1;
 
-            console.log('data : '+JSON.stringify(data));
-            res.render('list',{title: "종목토론게시판", session : session, data: data, no_data : no_data}); // -> ejs에서 fornt와 연결하는 방법
+            //console.log('data : '+JSON.stringify(data));
+            res.render('price',{title: "Top 종목", data: data, session : session, no_data : no_data});
             //return res.json({ statusCode: CODE.SUCCESS, msg: "getList Success" });
         });
     }catch(err){

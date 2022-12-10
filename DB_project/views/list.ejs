@@ -24,6 +24,7 @@
             </tr>
           </thead>
           <tbody>
+            <% if(no_data) { %> <td>첫 게시물을 작성해주세요!</td> <% } %>
 <%
             for(var i=0; i<data.length; i++){
                 var oneItem=data[i];

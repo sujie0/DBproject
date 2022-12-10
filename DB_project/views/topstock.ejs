@@ -19,8 +19,7 @@
 <html lang = "en">
 <body style="background: aliceblue;">
 <br>
-<h1 style="margin: 50px;">주식회사 목록</h1>
-
+<h1 style="margin: 50px;">Top 종목</h1>
 <% if(session=='master') { %>
     <div class="container">
 <p>
@@ -34,8 +33,10 @@
     <tr>
       <!--<th scope="col">id</th>-->
       <th scope="col">종목코드</th>
-      <th scope="col">기업이름<span class="text-muted">(recommand using ctrl+f)</span></th>
-      <th scope="col">상장주식수</th>
+      <th scope="col">종목명<span class="text-muted">(recommand using ctrl+f)</span></th>
+      <th scope="col">거래량</th>
+      <th scope="col">상승률</th>
+      <th scope="col">하락률</th>
     </tr>
   </thead>
   <tbody>
@@ -43,10 +44,11 @@
         var oneItem=rows[i]; 
     %>
 	    <tr>
-		    <!--<th><a href="/company/read?idx={idx}"><%=oneItem.idx%></a></th>-->
-		    <td><a href="/company/read?code=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
-		    <td><a href="/company/read?code=<%=oneItem.종목코드%>"><%=oneItem.기업이름%></a></td>
-		    <td><a><%=oneItem.상장주식수%></a></td>
+        <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
+        <td><%=oneItem.종목명%></td>
+        <td><%=oneItem.거래량%></td>
+        <td><%=oneItem.상승률%></td>
+        <td><%=oneItem.하락률%></td>
 	    </tr>
 	<% } %>
   </tbody>

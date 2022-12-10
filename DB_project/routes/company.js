@@ -7,6 +7,7 @@ const companyupdateController = require('../controller/companyupdateController')
 
 router.get('/',companygetlistController.getList);
 router.get('/read',companyreadController.readData);
+router.post('/read',companyreadController.buyPrice);
 router.get('/write',companywriteController.writeForm);
 router.post('/write', companywriteController.writeData);
 router.get('/update',companyupdateController.updateForm);
