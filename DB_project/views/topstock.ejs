@@ -33,7 +33,7 @@
     <tr>
       <!--<th scope="col">id</th>-->
       <th scope="col">종목코드</th>
-      <th scope="col">종목명<span class="text-muted">(recommand using ctrl+f)</span></th>
+      <th scope="col">종목명<span class="text-muted"></span></th>
       <th scope="col">거래량</th>
       <th scope="col">상승률</th>
       <th scope="col">하락률</th>
@@ -44,7 +44,7 @@
         var oneItem=rows[i]; 
     %>
 	    <tr>
-        <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
+        <td><a href="/company/read?code=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
         <td><%=oneItem.종목명%></td>
         <td><%=oneItem.거래량%></td>
         <td><%=oneItem.상승률%></td>
