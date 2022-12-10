@@ -1,0 +1,69 @@
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        
+        
+    </head>    
+
+    <style>
+
+        
+        .space {
+  width: 4px;
+  height: auto;
+  display: inline-block;
+}
+        
+        
+        
+        </style>
+      
+    <div class="container">
+        <p>
+        <h2>이용자 세부 정보 조회</h2>
+        <button type="button" class="btn btn-primary pull-right" style="float: right" onclick="location.href='/board/delete?idx=<%=data.idx%>'">글삭제</button>
+        <button type="button" class="btn btn-primary pull-right" style="float: right" onclick="location.href='/board/update?idx=<%=data.idx%>'">글수정</button>
+        
+        <a href="/manager/userlist">이용자 목록으로 돌아가기</a>
+        </p>
+        <hr style="border : solid 1px;">
+        
+        
+  <body>
+    <%var ID%>
+    <form action="/manager/update" method="get">
+        <table class="table">
+            <input type="hidden" name="ID" value="<%=data.ID%>"/>
+            <%ID=data.ID%>
+
+            <p><h3><%=data.ID%></h3><%=data.닉네임%></p>
+            <hr>
+<!--
+            <p>
+                <button type="button" class="btn btn-primary pull-right" onclick="location.href='/board/update?idx=<%=data.idx%>'">글수정</button>
+                <a href="/board">리스트로 돌아가기</a>
+            </p>
+-->            
+
+            <p><%=data.이메일%></p>
+            
+            
+            <p><%=Content[0].글제목%>
+            
+
+       
+        </table>
+        <hr style="border : solid 1px;">
+        
+    
+</form>
+
+    
+  </body>
+  </div>
+</html>

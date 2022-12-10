@@ -1,0 +1,80 @@
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 이렇게 하면 주석 -->
+
+<!DOCTYPE html>
+<html lang = "en">
+    <div class="container">
+        <h2>이용자 목록</h2>
+        
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>ID</th>
+              <th>사용자명</th>
+              <th>닉네임</th>
+              <th>이메일</th>
+              <th>회원등급</th>
+              <th>등급수정</th>
+             <!--<th>세부정보</th>--> 
+              <th>회원삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+<%
+            for(var i=1; i<data.length; i++){
+                var oneItem=data[i];
+%>
+                <tr>
+                    <td><%=i%></td>
+                    <td><%=oneItem.ID%></td>
+                    <td><%=oneItem.사용자명%></td>
+                    <td><%=oneItem.닉네임%></td>
+                    <td><%=oneItem.이메일%></td>
+                    
+                  
+                    <form action="/manager/update?ID=<%=oneItem.ID%>" method="post">
+                        
+                       <!-- <input type="hidden" name="ID" value="<%=oneItem.ID%>"/>-->
+                        <td><input type="text" name="Grade" class="form-control mt-4 mb-2" value="<%=oneItem.회원등급%>" required></td>    
+                        <td>
+                                <button type="submit" class="btn btn-primary pull-right" >수정</button>
+                            </td>
+                            
+                        </form>   
+                    
+                   
+                    <!--<td><button type="button" class="btn btn-primary pull-right"  onclick="location.href='/manager/read/<%=oneItem.ID%>'">조회</button></td>-->
+                    <td><button type="button" class="btn btn-primary pull-right"  onclick="location.href='/manager/delete?ID=<%=oneItem.ID%>'">삭제</button></td>
+                </tr>
+<%
+            }
+%>
+
+          </tbody>
+        </table>
+      
+        <hr/>
+        <!-- <a class="btn btn-default pull-right">글쓰기</a> -->
+      
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+    </div>
+</html>

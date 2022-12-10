@@ -1,0 +1,199 @@
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 이렇게 하면 주석 -->
+<link rel="stylesheet" href="../css/style.default.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="C:\Users\goodluck\Downloads\Backend-develop\Backend-develop\DB_project\example1\css\mycss.css">
+  <style>
+    div.list_1{
+      display: flex;
+    }
+    div.mytitle{
+      
+    }
+    div.as{
+  position:relative;
+  width:300px;
+  height:50px;
+  margin-left: 780px;
+  color: black;
+  animation-name: title_an;
+  animation-duration:2s;
+  animation-duration: leaner;
+  animation-direction:normal;
+  animation-fill-mode: forwards;
+  }
+  @-webkit-keyframes title_an {
+    0% {
+      bottom: -500px;
+      opacity: -0.55;
+    }
+    80%{
+      opacity: 0.9;
+      bottom:0px;
+    }
+    100% {
+      bottom:0px;
+      opacity: 1;
+    }
+  }
+/*  .parent {
+  border: 2px solid blue;
+  color: blue;
+  background: lightskyblue;
+}
+.child {
+  border: 2px dotted red;
+  color: red;
+  background: lightpink;
+}*/
+div.title_slogan{
+  margin-left: 660px;
+  margin-top: 50px;
+  opacity: 0;
+  animation-name: title_an;
+  animation-delay: 0.75s;
+  animation-duration:5s;
+  animation-duration: leaner;
+  animation-direction:alternate;
+  animation-fill-mode: forwards;
+}
+@-webkit-keyframes slogan_an {
+  0%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }}
+  .card{
+    bottom: -500px;
+    opacity: 0;
+  animation-name: title_an;
+  animation-delay: 1.5s;
+  animation-duration:5s;
+  animation-duration: leaner;
+  animation-direction:alternate;
+  animation-fill-mode: forwards;
+  }
+  </style>
+  <script>
+  </script>
+<!DOCTYPE html>
+<html lang = "en">
+<section>
+<body style="background-color: aliceblue;">
+  <div style=" margin-top: 50px;" class="parent">
+    <div class="as mytitle child">
+      <h1 class="" style="font-size: 70px;"><strong>큐브 투자</strong></h1>
+    </div>
+    <div class="title_slogan child" style="">
+      <h1 class="">한눈에 보기위한 최고의 투자소</h1>
+    </div>
+  </div>
+  <!-- <form id = "main" action="/main" method="GET"></form> -->
+<div class="list_1">
+    <div class="card" style="width: 500px; margin-left: 110px; margin-top: 70px;box-shadow: 10px 10px 10px; ">
+      <div class="card-body" style="">
+        <h5 class="card-title">top 종목<a href="/stock/top">+</a></h5>
+        <div style="">
+          <table class="table table-striped companytable" style=" margin-top: 50px; width: 460px;">
+            <thead>
+              <tr>
+                <!--<th scope="col">id</th>-->
+                <th scope="col">종목코드</th>
+                <th scope="col">거래량</th>
+                <th scope="col">상승률</th>
+                <th scope="col">하락률</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i = 0; i < data1.length; i++){
+                    var oneItem=data1[i];
+                    if(i==8){break;}
+                %>
+                <tr>
+                  <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
+                  <td><%=oneItem.거래량%></td>
+                  <td><%=oneItem.상승률%></td>
+                  <td><%=oneItem.하락률%></td>
+                </tr>
+              <%}%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="width: 500px; margin-left: 80px; margin-top: 70px; box-shadow: 10px 10px 10px; display: inline-block;">
+
+      <div class="card-body">
+        <h5 class="card-title">게시글 <a href="/board">+</a></h5>
+      
+
+      <div style="margin-top: 70px;">
+          <table class="table table-striped companytable" style="width: 460px;">
+            <thead>
+              <tr>
+                <!--<th scope="col">id</th>-->
+                <th scope="col">idx</th>
+                <th scope="col">글제목</th>
+                <th scope="col">닉네임</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i = 0; i < data2.length; i++){
+                    var oneItem=data2[i];
+                    if(i==8){break;}
+                %>
+                <tr>
+                  <td><%=i+1%></td>
+                  <td><a href="/board/read/<%=oneItem.idx%>"><%=oneItem.글제목%></a></td>
+                  <td><%=oneItem.닉네임%></td>
+                </tr>
+              <%}%>
+            </tbody>
+            
+          </table>
+        </div></div>
+    </div>
+
+  <div class="card" style="width: 500px; margin-left: 80px; margin-top: 70px; box-shadow: 10px 10px 10px; ">
+      <div class="card-body">
+        <h5 class="card-title">주식회사 <a href="/company">+</a></h5>
+      
+     <div style="">
+        <table class="table table-striped companytable" style=" width: 460px;">
+          <thead>
+            <tr>
+              <!--<th scope="col">id</th>-->
+              <th scope="col">종목코드</th>
+              <th scope="col">기업이름</th>
+              <th scope="col">상장주식수</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i = 0; i < data3.length; i++){
+                  var oneItem=data3[i];
+                  if(i==8){break;}
+              %>
+              <tr>
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
+                <td><a href="/company/read?idx=<%=oneItem.종목코드%>"><%=oneItem.기업이름%></a></td>
+                <td><a><%=oneItem.상장주식수%></a></td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div></div>
+  </div>
+</div>
+  </body>
+</section>
+  </html>

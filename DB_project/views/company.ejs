@@ -1,0 +1,59 @@
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 이렇게 하면 주석 -->
+<style type="text/css">
+  tr:nth-child(even) { background-color: skyblue; }
+  a[href]{
+    color: darkred;
+  }
+  td:hover{
+    background-color: pink;
+  }
+</style>
+
+<!DOCTYPE html>
+<html lang = "en">
+<body style="background: aliceblue;">
+<br>
+<h1 style="margin: 50px;">주식회사 목록</h1>
+
+<% if(session=='master') { %>
+    <div class="container">
+<p>
+    <button type="button" class="btn btn-primary pull-right" onclick="location.href='/company/write'">주식회사 등록</button>
+</p>
+</div>  
+<% } %>
+<div style="border: solid gray;margin-left: 350px; margin-top: 50px; width: 1200px;">
+<table class="table table-striped companytable" style="">
+  <thead>
+    <tr>
+      <!--<th scope="col">id</th>-->
+      <th scope="col">종목코드</th>
+      <th scope="col">기업이름<span class="text-muted"></span></th>
+      <th scope="col">상장주식수</th>
+      <th scope="col">기업정보</th>
+      <th scope="col">시세</th>
+    </tr>
+  </thead>
+  <tbody>
+	<% for(var i=0; i<rows.length; i++){
+        var oneItem=rows[i]; 
+    %>
+	    <tr>
+		    <!--<th><a href="/company/read?idx={idx}"><%=oneItem.idx%></a></th>-->
+		    <td><a href="/company/read?code=<%=oneItem.종목코드%>"><%=oneItem.종목코드%></a></td>
+		    <td><a href="/company/read?code=<%=oneItem.종목코드%>"><%=oneItem.기업이름%></a></td>
+		    <td><a><%=oneItem.상장주식수%></a></td>
+        <td><button type="button" class="btn btn-primary pull-right"  onclick="location.href='/company/read?code=<%=oneItem.종목코드%>'">조회</button></td>
+        <td><button type="button" class="btn btn-primary pull-right"  onclick="location.href='/stock/read/<%=oneItem.종목코드%>'">조회</button></td>
+	    </tr>
+	<% } %>
+  </tbody>
+</table>
+</div></body>
+</html>

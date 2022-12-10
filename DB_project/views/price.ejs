@@ -1,0 +1,49 @@
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 이렇게 하면 주석 -->
+
+<!DOCTYPE html>
+<html lang = "en">
+    <div class="container">
+        <h2>시세 조회</h2>
+        
+        <table class="table table-striped companytable">
+          <thead>
+            <tr>
+              <th>날짜</th>
+              <th>시가</th>
+              <th>저가</th>
+              <th>고가</th>
+              <th>종가</th>
+              <th>거래량</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if(no_data) { %> <td>시세 정보가 없습니다!</td> <% } %>
+<%
+            for(var i=0; i<data.length; i++){
+                var oneItem=data[i];
+%>
+                <tr>
+                    <td><%=oneItem.날짜%></td>
+                    <td><%=oneItem.시가%></td>
+                    <td><%=oneItem.저가%></td>
+                    <td><%=oneItem.고가%></td>
+                    <td><%=oneItem.종가%></td>
+                    <td><%=oneItem.거래량%></td>
+                    
+                </tr>
+<%
+            }
+%>
+          </tbody>
+        </table>
+      
+        <hr/>
+        <!-- <a class="btn btn-default pull-right">글쓰기</a> -->
+    </div>
+</html>

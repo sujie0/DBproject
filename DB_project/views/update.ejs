@@ -1,0 +1,58 @@
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>글 수정</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+    <div class="container">
+    <h1>글 수정</h1>
+    <form action="/board/update" method="post" enctype="multipart/form-data" onsubmit="return onWriteSubmit()">
+        <tr>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary pull-right" style="float: right">글쓰기</button>
+            </td>
+        </tr>
+        <a href="/board">리스트로 돌아가기</a>
+        </p>
+        <table class="table">
+            <input type="hidden" name="idx" value="<%=row.idx%>"/>
+            <input type="text" name="Title" class="form-control mt-4 mb-2" value="<%=row.글제목%>" required>
+        
+	    <div class="form-group">
+		    <textarea class="form-control" rows="10" name="Content" required><%=row.글내용%></textarea>
+	    </div>
+        <tr>
+            <td>이미지</td>
+            <td><input type="file" name="Image" /></td>
+        </tr>
+            
+        </table>
+    </form>
+    <script>
+        function onWriteSubmit(){
+            if($("#Title").val().trim()==""){
+                var message="제목을 입력해 주세요.";
+                $("#Title").val("");
+                $("#Title").focus();
+                alert(message);
+                return false;
+            }
+            if($("#Content").val().trim()==""){
+                var message="본문 내용을 입력하세요.";
+                $("#Content").val("");
+                $("#Content").focus();
+                alert(message);
+                return false;
+            }
+        }
+    </script>
+    </div>
+  </body>
+</html>

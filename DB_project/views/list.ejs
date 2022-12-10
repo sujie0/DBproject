@@ -1,0 +1,61 @@
+<% if(!session) { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout1.ejs')%> <% } %>
+<% if(session=='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout2.ejs')%> <% } %>
+<% if(session && session!='master') { %> <%-include('/Users/YUN SUJI/Documents/GitHub/Backend/DB_project/views/layout3.ejs')%> <% } %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 이렇게 하면 주석 -->
+
+<!DOCTYPE html>
+<html lang = "en">
+    <div class="container">
+        <h2>종목토론게시판</h2>
+        <p>종목에 대해 자유롭게 토론할 수 있는 게시판입니다~~!!</p>
+        
+        <p>
+        <button type="button" class="btn btn-primary pull-right" onclick="location.href='/board/write'">글쓰기</button>
+        </p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Title</th>
+              <th>작성자</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if(no_data) { %> <td>첫 게시물을 작성해주세요!</td> <% } %>
+<%
+            for(var i=0; i<data.length; i++){
+                var oneItem=data[i];
+%>
+                <tr>
+                    <td><%=i+1%></td>
+                    <td><a href="/board/read/<%=oneItem.idx%>"><%=oneItem.글제목%></a></td>
+                    <td><%=oneItem.닉네임%></td>
+                </tr>
+<%
+            }
+%>
+          </tbody>
+        </table>
+      
+        <hr/>
+        <!-- <a class="btn btn-default pull-right">글쓰기</a> -->
+      
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+    </div>
+</html>

@@ -1,0 +1,79 @@
+.slide{
+	margin: 20px 200px 10px 200px;
+
+}
+img.d-block{
+	height: 800px;
+}
+.slidefit{
+	width:100px;
+	height: 100px;
+	object-fit: fill;
+	margin: 10px;
+}
+nav.navbar{
+	background: white;
+	border-top: solid;
+	width: 1920px;
+}
+table.mytable{
+	width: 650px;
+	margin-left: 250px;
+}
+table.table-striped{
+	width: 1500px;
+	margin-top: 200px;
+	margin-left: 200px;
+}
+table.table-borderless{
+	width:550px;
+	margin-left: 0px;
+}
+ul.navbar{
+	background: greenyellow;
+	margin: 100px;
+	padding: 0;
+	width: 100px;
+}
+ul li {
+	display: inline;
+	padding: 0px 100px;
+}
+ul li a.navlink{
+	font-size: 40px;
+	color: black;
+	margin: 0px 50px 0px 50px;
+	/*
+	text-align:center;*/
+
+}
+ul li a:hover{
+	color: red;
+	text-decoration: none;
+}
+.login{
+	font-size: 20px;
+	float: right;
+	color: black;
+	margin: 20px;
+}
+.login:hover{
+	text-decoration: underline;
+}
+.logo{
+	height: 80px;
+	width: 180px;
+
+}
+div.slogan{
+	margin: 400px 40px 40px 40px;
+}
+div.slogan h3{
+	font-size: 4rem; 
+	color: blue; 
+	text-align: center;"
+}
+p.slogan{
+	font-size: 2rem; 
+	text-align: center;
+}
