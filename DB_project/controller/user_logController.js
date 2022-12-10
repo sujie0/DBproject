@@ -31,7 +31,7 @@ exports.postLogin=async function(req, res, next){    //이용자 회원가입
             req.session.is_logined = true;
 
             console.log('data : '+JSON.stringify(rows));
-            return res.send("<script>alert('로그인 완료되었습니다.'); window.location.replace('/board'); </script>");
+            return res.send("<script>alert('로그인 완료되었습니다.'); window.location.replace('/main'); </script>");
             //return res.json({ statusCode: CODE.SUCCESS, body});
         }else{
             console.log("비밀번호 불일치");

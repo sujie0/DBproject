@@ -15,6 +15,8 @@ const boardRouter = require('./routes/board');
 const companyRouter = require('./routes/company');
 const managerRouter = require('./routes/manager');
 const userRouter = require('./routes/user');   //이용자 기능
+const mainRouter = require('./routes/main');
+const stockRouter = require('./routes/stock');
 
 const app = express();
 
@@ -48,6 +50,8 @@ app.use('/board', boardRouter);
 app.use('/company', companyRouter); //주식회사
 app.use('/manager',managerRouter);
 app.use('/user', userRouter);       //이용자
+app.use('/main', mainRouter);
+app.use('/stock', stockRouter);  
 
 app.use((err, req, res, next) => {
   console.error(err);

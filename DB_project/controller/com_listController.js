@@ -5,14 +5,15 @@ const CODE = require('../modules/statusCode');
 
 exports.getList=(req, res, next)=>{    //주식회사 정보 목록 조회
     var ID = req.session.ID;
+    var no_data=0;
     try{
         com_listModel.getList((rows)=>{
             if(!rows[0])
-            history.go(-1);
+                no_data=1;
                 //return res.json({ statusCode: CODE.FAIL, msg: "No data in DB" });
 
             //console.log('data : '+JSON.stringify(rows));
-            res.render('company',{rows: rows, session : ID}); // -> ejs에서 fornt와 연결하는 방법
+            res.render('company',{rows: rows, session : ID, no_data : no_data}); // -> ejs에서 fornt와 연결하는 방법
             //return res.json({ statusCode: CODE.SUCCESS, msg: "getList Success" });
         });
     }catch(err){

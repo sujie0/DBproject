@@ -8,9 +8,10 @@
 
 <!DOCTYPE html>
 <html lang = "en">
-<div class="card" style="width: 1000px; margin-left: 400px;">
+<body style="background: aliceblue;">
+<div class="card" style="width: 700px; margin-left: 550px; margin-top: 70px; box-shadow: 10px 10px 10px; ">
     <div class="card-body">
-    <h5 class="card-title">주식회사 정보</h5>
+    <h5 class="card-title"><strong>주식회사 정보</strong></h5>
     <h6 class="card-subtitle mb-2 text-muted">주식회사의 세부정보를 표시합니다</h6>
 
     <% if(session=='master') { %>
@@ -21,7 +22,7 @@
     </div>  
     <% } %>
 	<div class="container">
-	<div>
+	<div style="margin-top: 60px;">
 		<dl>
 			<dt>종목코드</dt>
 			<dd style="margin-left: 10px;"><%=rows.종목코드%></dd>
@@ -32,8 +33,20 @@
             <dt>기업개요</dt>
 			<dd style="margin-left: 10px;"><%=rows.기업개요%></dd>
 		</dl>
+		<form action="/company/read?code=<%=rows.종목코드%>" method="post">
+			<form name="commentInsertForm">
+				<div class="input-group">
+				   
+				   <input type="text" position="relative" right="30px" id="Number" name="Number" placeholder="매수주식수를 입력하세요.">
+				   
+					<button type="submit" class="btn btn-primary pull-right" style="float: right">매수</button>
+				   
+				  </div>
+			</form>
+		</form>
 	</div>
 	</div>
 </div>
 </div>
+<footer class="fixedbottom"></footer></body>
 </html>
