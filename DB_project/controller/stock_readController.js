@@ -10,7 +10,7 @@ exports.readData=(req, res, next)=>{    //종목시세 세부정보 조회
     try{
         stock_readModel.getData(code, (data)=>{
             if(!data[0])
-                no_data=1;
+                return res.send("<script>alert('시세 정보가 존재하지 않습니다.'); history.go(-1); </script>");
 
             //console.log('data : '+JSON.stringify(data));
             res.render('price',{title: "Top 종목", data: data, session : session, no_data : no_data});
